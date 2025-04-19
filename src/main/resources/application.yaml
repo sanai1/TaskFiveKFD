@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: TaskFiveKFD
+  jpa:
+    generate-ddl: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydemodb
+    username: root
+    password: My7Pass@Word_9_8A_zE
+logging:
+  level:
+    ROOT: DEBUG

@@ -1,0 +1,2747 @@
+{
+	"info": {
+		"_postman_id": "20cee44b-60c6-4e91-b571-d0584ff8a56b",
+		"name": "TaskFourKFD",
+		"description": "Привилегии доступа распределены в зависимости от превикса после /api/v1/\\*\n\n/user/** - привилегии уровня USER\n\n/admin/** - привелегии уровня ADMIN\n\nзапрос POST для создания пользователей доступен всем\n\nвсе запросы доступные для уровня USER автоматически доступны для ADMIN (сделано специально, тк предполагалась отладка на уровне работы с консольным приложением)\n\nВ каждом запросе есть сохраненный эталонный ответ на тех данных, которыми заполнены запросы.\n\nПорядок запросов в коллекции выстроен в том порядке, в котором можно выполнять запросы и получать ответ (исключена ситуция, когда запрос для изменения размера капитала у пользователя по id валютной паре идет раньше, чем добавление самой валюты или пользователя)\n\nНа картинке представлена выгруженная диаграмма базы данных (MySQL) из DBeaver\n\n<img src=\"https://content.pstmn.io/88e3b5f5-5a19-43ed-9021-fdc1b7084525/bXlkZW1vZGIucG5n\" alt=\"\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40435681"
+	},
+	"item": [
+		{
+			"name": "user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Transfer-Encoding",
+						"value": "chunked",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uid\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"login\":\"admin\",\n    \"password\":\"passwordADMIN\",\n    \"role\":\"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/users",
+				"description": "Запрос доступен без авторизации для создания пользователя. В теле передаются данные для создания"
+			},
+			"response": [
+				{
+					"name": "create ROOT",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Transfer-Encoding",
+								"value": "chunked",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"login\":\"root\",\n    \"password\":\"passwordROOT\",\n    \"role\":\"ADMIN, USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/v1/users"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:10:33 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uid\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"login\": \"root\",\n    \"password\": \"$2a$10$PR9bfSr4r7EidKx2xTLK.uYjk.cyOyOLg5K0yvUBcoWanelOCxIS6\",\n    \"role\": \"ADMIN, USER\"\n}"
+				},
+				{
+					"name": "create USER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Transfer-Encoding",
+								"value": "chunked",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"login\":\"user\",\n    \"password\":\"passwordUSER\",\n    \"role\":\"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/v1/users"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:11:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uid\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"login\": \"user\",\n    \"password\": \"$2a$10$9mq5nTZOBcmu7dMIBcQTA.HYbQ43i2ZGGnACvXseGWWqgMgZTd6Qe\",\n    \"role\": \"USER\"\n}"
+				},
+				{
+					"name": "create ADMIN",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Transfer-Encoding",
+								"value": "chunked",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"login\":\"admin\",\n    \"password\":\"passwordADMIN\",\n    \"role\":\"ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/v1/users"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:11:53 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uid\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"login\": \"admin\",\n    \"password\": \"$2a$10$5cLynG6cgYfD0KG.C6kZeOwKZUKQWdqRvTfg2k5FZD1OjrHxGSz/y\",\n    \"role\": \"ADMIN\"\n}"
+				}
+			]
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{url_admin}}/users",
+				"description": "Запрос для получения списка всех пользователей (данные проходят обработку перед отправкой)"
+			},
+			"response": [
+				{
+					"name": "users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46cGFzc3dvcmQ=",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "{{url_admin}}/users"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:12:56 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"uid\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"login\": \"user\",\n        \"password\": \"$2a$10$9mq5nTZOBcmu7dMIBcQTA.HYbQ43i2ZGGnACvXseGWWqgMgZTd6Qe\",\n        \"role\": \"USER\"\n    },\n    {\n        \"uid\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"login\": \"root\",\n        \"password\": \"$2a$10$PR9bfSr4r7EidKx2xTLK.uYjk.cyOyOLg5K0yvUBcoWanelOCxIS6\",\n        \"role\": \"ADMIN, USER\"\n    },\n    {\n        \"uid\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"login\": \"admin\",\n        \"password\": \"$2a$10$5cLynG6cgYfD0KG.C6kZeOwKZUKQWdqRvTfg2k5FZD1OjrHxGSz/y\",\n        \"role\": \"ADMIN\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\":\"USD\"\n    },\n    {\n        \"name\":\"EUR\"\n    },\n    {\n        \"name\":\"RUB\"\n    },\n    {\n        \"name\":\"USDT\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_admin}}/currency/list",
+				"description": "Запрос для создания валют списком. Список реализован для удобства и сокращения количества запросов к серверу"
+			},
+			"response": [
+				{
+					"name": "currency",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\":\"USD\"\n    },\n    {\n        \"name\":\"EUR\"\n    },\n    {\n        \"name\":\"RUB\"\n    },\n    {\n        \"name\":\"USDT\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_admin}}/currency/list"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:15:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \"USD\"\n    },\n    {\n        \"name\": \"EUR\"\n    },\n    {\n        \"name\": \"RUB\"\n    },\n    {\n        \"name\": \"USDT\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "currency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url_user}}/currency",
+				"description": "Запрос для просмотра всех валют, которые есть в БД"
+			},
+			"response": [
+				{
+					"name": "currency",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_user}}/currency"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:16:02 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \"EUR\"\n    },\n    {\n        \"name\": \"RUB\"\n    },\n    {\n        \"name\": \"USD\"\n    },\n    {\n        \"name\": \"USDT\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_uid\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency_one\":\"EUR\",\n    \"currency_two\":\"USDT\",\n    \"course\":2,\n    \"summa_one\":70,\n    \"summa_two\":140\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_user}}/users/transactions",
+				"description": "Запрос для создания транзакции у конкретного пользователя. В теле передается весь объект, один из полей является user_uid - оно используется для определения к какому пользователю должна добавиться транзакция"
+			},
+			"response": [
+				{
+					"name": "create USER transaction",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_uid\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"currency_one\":\"USDT\",\n    \"currency_two\":\"USD\",\n    \"course\":1,\n    \"summa_one\":50,\n    \"summa_two\":50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/users/transactions"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:16:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"user_uid\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"currency_one\": \"USDT\",\n    \"currency_two\": \"USD\",\n    \"course\": 1,\n    \"summa_one\": 50,\n    \"summa_two\": 50\n}"
+				},
+				{
+					"name": "create ADMIN transaction",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_uid\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"currency_one\":\"RUB\",\n    \"currency_two\":\"EUR\",\n    \"course\":100,\n    \"summa_one\":5000,\n    \"summa_two\":50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/users/transactions"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:17:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"user_uid\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"currency_one\": \"RUB\",\n    \"currency_two\": \"EUR\",\n    \"course\": 100,\n    \"summa_one\": 5000,\n    \"summa_two\": 50\n}"
+				},
+				{
+					"name": "create ROOT transaction",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_uid\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency_one\":\"EUR\",\n    \"currency_two\":\"USDT\",\n    \"course\":2,\n    \"summa_one\":70,\n    \"summa_two\":140\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/users/transactions"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:19:00 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"user_uid\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency_one\": \"EUR\",\n    \"currency_two\": \"USDT\",\n    \"course\": 2,\n    \"summa_one\": 70,\n    \"summa_two\": 140\n}"
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_user}}/users/transactions?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+					"host": [
+						"{{url_user}}"
+					],
+					"path": [
+						"users",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+							"description": "USER",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"description": "ADMIN",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+							"description": "ROOT"
+						}
+					]
+				},
+				"description": "Запрос для получения всех транзакций пользователя по user_uid, который передается в параметрах (добавлено несколько для тестирования)"
+			},
+			"response": [
+				{
+					"name": "find USER transactions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/users/transactions?userId=46135926-89e1-465c-a0dd-425d2219a69d",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"users",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER"
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:19:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_uid\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency_one\": \"USDT\",\n        \"currency_two\": \"USD\",\n        \"course\": 1,\n        \"summa_one\": 50,\n        \"summa_two\": 50\n    }\n]"
+				},
+				{
+					"name": "find ADMIN transactions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/users/transactions?userId=e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"users",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN"
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:20:02 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"user_uid\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency_one\": \"RUB\",\n        \"currency_two\": \"EUR\",\n        \"course\": 100,\n        \"summa_one\": 5000,\n        \"summa_two\": 50\n    }\n]"
+				},
+				{
+					"name": "find ROOT transactions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/users/transactions?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"users",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:20:21 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"user_uid\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency_one\": \"EUR\",\n        \"currency_two\": \"USDT\",\n        \"course\": 2,\n        \"summa_one\": 70,\n        \"summa_two\": 140\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currency_one\":\"RUB\",\n    \"currency_two\":\"USDT\",\n    \"course\":110\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_admin}}/courses",
+				"description": "Зарос для добавления курса валютной пары"
+			},
+			"response": [
+				{
+					"name": "create course USD/RUB",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"USD\",\n    \"currency_two\":\"RUB\",\n    \"course\":100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_admin}}/courses"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:21:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"currency_one\": \"USD\",\n    \"currency_two\": \"RUB\",\n    \"course\": 100\n}"
+				},
+				{
+					"name": "create course EUR/USD",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"EUR\",\n    \"currency_two\":\"USD\",\n    \"course\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_admin}}/courses"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:22:00 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"currency_one\": \"EUR\",\n    \"currency_two\": \"USD\",\n    \"course\": 1\n}"
+				},
+				{
+					"name": "create course RUB/USDT",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"RUB\",\n    \"currency_two\":\"USDT\",\n    \"course\":110\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_admin}}/courses"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:22:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"currency_one\": \"RUB\",\n    \"currency_two\": \"USDT\",\n    \"course\": 110\n}"
+				}
+			]
+		},
+		{
+			"name": "course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url_user}}/courses",
+				"description": "Запрос для получения данных о курсе всех валютных пар, которые есть на сервере (БД)"
+			},
+			"response": [
+				{
+					"name": "course",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_user}}/courses"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:23:07 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"currency_one\": \"USD\",\n        \"currency_two\": \"RUB\",\n        \"course\": 100\n    },\n    {\n        \"id\": 2,\n        \"currency_one\": \"EUR\",\n        \"currency_two\": \"USD\",\n        \"course\": 1\n    },\n    {\n        \"id\": 3,\n        \"currency_one\": \"RUB\",\n        \"currency_two\": \"USDT\",\n        \"course\": 110\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "course",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currency_one\":\"RUB\",\n    \"currency_two\":\"USDT\",\n    \"course\":100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_user}}/courses/3",
+				"description": "Запрос для изменения конкретного курса валюты после проведения транзакции (по ТЗ). ID передается в качестве переменной в самом URL"
+			},
+			"response": [
+				{
+					"name": "update course USD/RUB",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"USD\",\n    \"currency_two\":\"RUB\",\n    \"course\":220\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/courses/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:23:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"currency_one\": \"USD\",\n    \"currency_two\": \"RUB\",\n    \"course\": 220\n}"
+				},
+				{
+					"name": "update course EUR/USD",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"EUR\",\n    \"currency_two\":\"USD\",\n    \"course\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/courses/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:24:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"currency_one\": \"EUR\",\n    \"currency_two\": \"USD\",\n    \"course\": 2\n}"
+				},
+				{
+					"name": "update course RUB/USDT",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency_one\":\"RUB\",\n    \"currency_two\":\"USDT\",\n    \"course\":100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/courses/3"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:25:33 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"currency_one\": \"RUB\",\n    \"currency_two\": \"USDT\",\n    \"course\": 100\n}"
+				}
+			]
+		},
+		{
+			"name": "course Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url_user}}/courses",
+				"description": "Запрос для получения данных о курсе всех валютных пар, которые есть на сервере (БД)"
+			},
+			"response": [
+				{
+					"name": "course after update",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url_user}}/courses"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:26:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"currency_one\": \"USD\",\n        \"currency_two\": \"RUB\",\n        \"course\": 220\n    },\n    {\n        \"id\": 2,\n        \"currency_one\": \"EUR\",\n        \"currency_two\": \"USD\",\n        \"course\": 2\n    },\n    {\n        \"id\": 3,\n        \"currency_one\": \"RUB\",\n        \"currency_two\": \"USDT\",\n        \"course\": 100\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "capital",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"RUB\",\n        \"amount\":150000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"USD\",\n        \"amount\":30000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"EUR\",\n        \"amount\":30000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"USDT\",\n        \"amount\":20000\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_user}}/capitals",
+				"description": "Запрос для создания записей о количестве валют по user_id (указывается в параметрах). Передача происходит списком для сокращения количесва запросов к серверу и упрощению взаимодействия с ним. Подразумевался автоматический вызов данной функции (убрать возможность самого запроса) при создании пользователя (по ТЗ в начале фиксированное количество каждой валюты)"
+			},
+			"response": [
+				{
+					"name": "create defolt capital USER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"user_id\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\":\"RUB\",\n        \"amount\":100000\n    },\n    {\n        \"user_id\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\":\"USD\",\n        \"amount\":25000\n    },\n    {\n        \"user_id\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\":\"EUR\",\n        \"amount\":25000\n    },\n    {\n        \"user_id\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\":\"USDT\",\n        \"amount\":15000\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:29:28 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"RUB\",\n        \"amount\": 100000\n    },\n    {\n        \"id\": 2,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USD\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 3,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 4,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "create defolt capital ADMIN",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"user_id\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\":\"RUB\",\n        \"amount\":100000\n    },\n    {\n        \"user_id\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\":\"USD\",\n        \"amount\":25000\n    },\n    {\n        \"user_id\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\":\"EUR\",\n        \"amount\":25000\n    },\n    {\n        \"user_id\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\":\"USDT\",\n        \"amount\":15000\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:30:34 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 5,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"RUB\",\n        \"amount\": 100000\n    },\n    {\n        \"id\": 6,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USD\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 7,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 8,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "create capital defoltPLUS ROOT",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"RUB\",\n        \"amount\":150000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"USD\",\n        \"amount\":30000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"EUR\",\n        \"amount\":30000\n    },\n    {\n        \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\":\"USDT\",\n        \"amount\":20000\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:31:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 9,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"RUB\",\n        \"amount\": 150000\n    },\n    {\n        \"id\": 10,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USD\",\n        \"amount\": 30000\n    },\n    {\n        \"id\": 11,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"EUR\",\n        \"amount\": 30000\n    },\n    {\n        \"id\": 12,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USDT\",\n        \"amount\": 20000\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "capital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_user}}/capitals?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+					"host": [
+						"{{url_user}}"
+					],
+					"path": [
+						"capitals"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+							"description": "USER",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"description": "ADMIN",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+							"description": "ROOT"
+						}
+					]
+				},
+				"description": "Запрос для получения данных о размере капитала всех валют у конкретного пользователя (user_uid - параметр)"
+			},
+			"response": [
+				{
+					"name": "find capitals USER",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=46135926-89e1-465c-a0dd-425d2219a69d",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER"
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:32:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"RUB\",\n        \"amount\": 100000\n    },\n    {\n        \"id\": 2,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USD\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 3,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 4,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "find capitals ADMIN",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN"
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:32:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 5,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"RUB\",\n        \"amount\": 100000\n    },\n    {\n        \"id\": 6,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USD\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 7,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 8,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "find capitals ROOT",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:33:05 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 9,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"RUB\",\n        \"amount\": 150000\n    },\n    {\n        \"id\": 10,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USD\",\n        \"amount\": 30000\n    },\n    {\n        \"id\": 11,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"EUR\",\n        \"amount\": 30000\n    },\n    {\n        \"id\": 12,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USDT\",\n        \"amount\": 20000\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "capital",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency\":\"EUR\",\n    \"amount\":33330\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_user}}/capitals/11",
+				"description": "Запрос для изменения количества капитала конкретной валюты у пользователя (user_id - поле в теле запроса), id записи где необходимо совершить изменение указывается в URL"
+			},
+			"response": [
+				{
+					"name": "update capital 1 USER",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"currency\":\"RUB\",\n    \"amount\":90000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:34:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n    \"currency\": \"RUB\",\n    \"amount\": 90000\n}"
+				},
+				{
+					"name": "update capital 6 ADMIN",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"currency\":\"USD\",\n    \"amount\":22500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals/6"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:35:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 6,\n    \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n    \"currency\": \"USD\",\n    \"amount\": 22500\n}"
+				},
+				{
+					"name": "update capital 11 ROOT",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":\"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency\":\"EUR\",\n    \"amount\":33330\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url_user}}/capitals/11"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:35:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 11,\n    \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n    \"currency\": \"EUR\",\n    \"amount\": 33330\n}"
+				}
+			]
+		},
+		{
+			"name": "capital Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_user}}/capitals?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+					"host": [
+						"{{url_user}}"
+					],
+					"path": [
+						"capitals"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+							"description": "USER",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"description": "ADMIN",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+							"description": "ROOT"
+						}
+					]
+				},
+				"description": "Запрос для получения данных о размере капитала всех валют у конкретного пользователя (user_uid - параметр)"
+			},
+			"response": [
+				{
+					"name": "capitals after update USER",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=46135926-89e1-465c-a0dd-425d2219a69d",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER"
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:39:22 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"RUB\",\n        \"amount\": 90000\n    },\n    {\n        \"id\": 2,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USD\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 3,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 4,\n        \"user_id\": \"46135926-89e1-465c-a0dd-425d2219a69d\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "capitals after update ADMIN",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN"
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:40:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 5,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"RUB\",\n        \"amount\": 100000\n    },\n    {\n        \"id\": 6,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USD\",\n        \"amount\": 22500\n    },\n    {\n        \"id\": 7,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"EUR\",\n        \"amount\": 25000\n    },\n    {\n        \"id\": 8,\n        \"user_id\": \"e1b0799e-7b22-4e29-be51-bb2fe2077e2e\",\n        \"currency\": \"USDT\",\n        \"amount\": 15000\n    }\n]"
+				},
+				{
+					"name": "capitals after apdate ROOT",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_user}}/capitals?userId=819db2e6-f562-4fca-a29f-d845814a04e6",
+							"host": [
+								"{{url_user}}"
+							],
+							"path": [
+								"capitals"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "46135926-89e1-465c-a0dd-425d2219a69d",
+									"description": "USER",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "e1b0799e-7b22-4e29-be51-bb2fe2077e2e",
+									"description": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "819db2e6-f562-4fca-a29f-d845814a04e6",
+									"description": "ROOT"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Dec 2024 23:40:35 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 9,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"RUB\",\n        \"amount\": 150000\n    },\n    {\n        \"id\": 10,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USD\",\n        \"amount\": 30000\n    },\n    {\n        \"id\": 11,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"EUR\",\n        \"amount\": 33330\n    },\n    {\n        \"id\": 12,\n        \"user_id\": \"819db2e6-f562-4fca-a29f-d845814a04e6\",\n        \"currency\": \"USDT\",\n        \"amount\": 20000\n    }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": {
+			"password": "passwordADMIN",
+			"username": "admin"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_user",
+			"value": "localhost:8080/api/v1/user"
+		},
+		{
+			"key": "url_admin",
+			"value": "localhost:8080/api/v1/admin"
+		}
+	]
+}
