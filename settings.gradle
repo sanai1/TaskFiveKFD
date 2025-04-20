@@ -1,1 +1,5 @@
 rootProject.name = 'TaskFiveKFD'
+
+include(
+        ":ServiceRegistry"
+)
