@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  service-registry:
+    build:
+      context: ./ServiceRegistry
+      dockerfile: Dockerfile
+    hostname: service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  api-gateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: Dockerfile
+    hostname: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
+    networks:
+      - microservices-network
+
+  user-service:
+    build:
+      context: ./UserService
+      dockerfile: Dockerfile
+    hostname: user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - service-registry
+      - mysql-user
+    networks:
+      - microservices-network
+
+  payment-service:
+    build:
+      context: ./PaymentService
+      dockerfile: Dockerfile
+    hostname: payment-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - service-registry
+      - mysql-payment
+    networks:
+      - microservices-network
+
+  mysql-user:
+    image: mysql:8.0
+    container_name: mysql-user
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/user_db_root_password
+      MYSQL_DATABASE: users_db
+    ports:
+      - "3310:3306"
+    secrets:
+      - user_db_root_password
+    depends_on:
+      - service-registry
+    volumes:
+      - mysql_data_user:/var/lib/mysql
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=$$(cat /run/secrets/user_db_root_password)" ]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 10
+    networks:
+      - microservices-network
+
+  mysql-payment:
+    image: mysql:8.0
+    container_name: mysql-payment
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/payment_db_root_password
+      MYSQL_DATABASE: payment_db
+    ports:
+      - "3320:3306"
+    secrets:
+      - payment_db_root_password
+    depends_on:
+      - service-registry
+    volumes:
+      - mysql_data_payment:/var/lib/mysql
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=$$(cat /run/secrets/payment_db_root_password)" ]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 10
+    networks:
+      - microservices-network
+
+volumes:
+  mysql_data_user:
+  mysql_data_payment:
+
+networks:
+  microservices-network:
+    driver: bridge
+
+secrets:
+  user_db_root_password:
+    file: ./secrets/user_db_root_password.txt
+  payment_db_root_password:
+    file: ./secrets/payment_db_root_password.txt
